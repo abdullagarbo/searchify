@@ -2,7 +2,7 @@ const page: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  height: '100vh',
+  minHeight: '100vh',
 };
 
 function Container({ children }: { children: React.ReactNode }) {
