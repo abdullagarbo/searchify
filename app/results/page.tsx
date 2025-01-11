@@ -1,20 +1,57 @@
 import { v4 as uuid } from 'uuid';
-import ResultsItem from '@/components/ResultsItem';
-import data from '@/utils/data';
-import styles from './Results.module.css';
+import { searchData } from '@/utils/data';
+import ResultsContainer from '@/components/Results/ResultsContainer';
+import ResultsItem from '@/components/Results/ResultsItem';
+import ResultsNotFound from '@/components/Results/ResultsNotFound';
 
-function ResultsPage() {
+async function ResultsPage({
+  searchParams,
+}: {
+  searchParams: { search?: string };
+}) {
+  const { search } = await searchParams;
+  const keyword = search || '';
+  const animals = searchData(keyword);
+
+  if (animals.length === 0) {
+    return (
+      <ResultsContainer
+        leftSide={
+          <ResultsNotFound
+            keyword={keyword}
+            title='No results found for'
+            description='insect, fish, horse, crocodile, bear, cetacean, cow, lion,
+              rabbit, cat, snake, dog, bird.'
+          />
+        }
+      />
+    );
+  }
+
+  // if (keyword === '') {
+  //   return (
+  //     <ResultsContainer
+  //       leftSide={
+  //         <ResultsNotFound
+  //           description='insect, fish, horse, crocodile, bear, cetacean, cow, lion,
+  //           rabbit, cat, snake, dog, bird.'
+  //         />
+  //       }
+  //     />
+  //   );
+  // }
+
   return (
-    <main className={styles.searchResultsContainer}>
-      <div className={styles.searchResults}>
+    <ResultsContainer
+      leftSide={
         <ul>
-          {data.map((result) => (
+          {animals.map((result) => (
             <ResultsItem key={uuid()} result={result} />
           ))}
         </ul>
-      </div>
-      <div className={styles.searchPreview}></div>
-    </main>
+      }
+      rightSide={<p>Preview</p>}
+    />
   );
 }
 

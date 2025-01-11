@@ -17,4 +17,13 @@ const data = [...new Array(50)].map((item, index) => {
   };
 });
 
+export const searchData = (keyword: string) => {
+  if (!keyword) return data;
+  return data.filter(
+    (item) =>
+      item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+      item.description.toLowerCase().includes(keyword.toLowerCase())
+  );
+};
+
 export default data;
