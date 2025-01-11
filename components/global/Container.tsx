@@ -1,4 +1,4 @@
-const container: React.CSSProperties = {
+const page: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -6,7 +6,7 @@ const container: React.CSSProperties = {
 };
 
 function Container({ children }: { children: React.ReactNode }) {
-  return <div style={container}>{children}</div>;
+  return <div style={page}>{children}</div>;
 }
 
 export default Container;
