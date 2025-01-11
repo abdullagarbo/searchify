@@ -8,17 +8,27 @@
   box-sizing: border-box;
 }
 
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
 @media (max-width: 600px) {
   .header {
     flex-direction: column;
     align-items: center;
   }
 
-  .header p:last-child {
+  .userSection {
     display: none;
   }
 
-  .header p:first-child {
+  .header p {
     text-align: center;
     width: 100%;
   }
