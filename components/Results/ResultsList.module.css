@@ -1,0 +1,36 @@
+.searchResults {
+  flex: 3;
+  padding: 0 16px;
+}
+
+.searchResults ul {
+  list-style: none;
+  padding: 0;
+}
+
+.searchResults li {
+  margin-bottom: 16px;
+  padding: 0 16px 16px 16px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.searchResults h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+
+.searchResults a {
+  color: #1a0dab;
+  text-decoration: none;
+}
+
+.searchResults a:visited {
+  color: #609;
+}
+
+.searchResults p {
+  margin: 0;
+  color: #202124;
+}

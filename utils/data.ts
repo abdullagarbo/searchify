@@ -17,7 +17,10 @@ const data = [...new Array(50)].map((item, index) => {
   };
 });
 
-export const searchData = (keyword: string) => {
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export const searchData = async (keyword: string) => {
+  await delay(3000);
   if (!keyword) return data;
   return data.filter(
     (item) =>

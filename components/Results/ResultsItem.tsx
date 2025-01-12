@@ -1,4 +1,4 @@
-import { Result } from '../utils/types';
+import { Result } from '@/utils/types';
 
 const searchLink = {
   fontSize: '12px',
@@ -7,17 +7,13 @@ const searchLink = {
   marginBottom: '4px',
 };
 
-type ResultsItemProps = {
-  result: Result;
-};
-
-function ResultsItem({ result }: ResultsItemProps) {
+function ResultsItem({ result }: { result: Result }) {
   const { id, url, title, description } = result;
   return (
     <li key={id}>
       <cite style={searchLink}>{url}</cite>
       <h3>
-        <a href={url}>{title}</a>
+        <a href='#'>{title}</a>
       </h3>
       <p>{description}</p>
     </li>
