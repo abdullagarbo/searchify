@@ -7,6 +7,7 @@ import ResultsNotFound from '@/components/Results/ResultsNotFound';
 import ResultsList from '@/components/Results/ResultsList';
 import ResultPreview from '@/components/Results/ResultPreview';
 import LoadingContainer from '@/components/global/LoadingContainer';
+import Modal from '@/components/global/Modal';
 import { Result } from '@/utils/types';
 import { searchData, searchDataById } from '@/utils/data';
 
@@ -18,6 +19,17 @@ function ResultsPage() {
   const [animals, setAnimals] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
   const [preview, setPreview] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 1024);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +50,11 @@ function ResultsPage() {
     const animals = searchDataById(id);
     setAnimals(animals);
     setPreview(true);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   if (loading) {
@@ -81,7 +98,12 @@ function ResultsPage() {
   return (
     <ResultsContainer>
       <ResultsList data={animals} preview={(id) => handlePreview(id)} />
-      {preview && <ResultPreview data={animals[0]} />}
+      {preview && isLargeScreen && <ResultPreview data={animals[0]} />}
+      {preview && !isLargeScreen && (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <ResultPreview data={animals[0]} />
+        </Modal>
+      )}
     </ResultsContainer>
   );
 }
