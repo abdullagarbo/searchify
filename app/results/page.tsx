@@ -8,15 +8,16 @@ import ResultsList from '@/components/Results/ResultsList';
 import ResultPreview from '@/components/Results/ResultPreview';
 import LoadingContainer from '@/components/global/LoadingContainer';
 import { Result } from '@/utils/types';
-import { searchData } from '@/utils/data';
+import { searchData, searchDataById } from '@/utils/data';
 
 function ResultsPage() {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
-  const search = searchParams.get('search');
+  const search = searchParams.get('search')?.toString();
   const keyword = search || '';
   const [animals, setAnimals] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
+  const [preview, setPreview] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +25,7 @@ function ResultsPage() {
       const animals = await searchData(keyword);
       setAnimals(animals);
       setLoading(false);
+      setPreview(false);
     };
 
     const params = new URLSearchParams(searchParams);
@@ -31,6 +33,12 @@ function ResultsPage() {
     replace(`/results?${params.toString()}`);
     fetchData();
   }, [keyword, searchParams, replace]);
+
+  const handlePreview = (id: number) => {
+    const animals = searchDataById(id);
+    setAnimals(animals);
+    setPreview(true);
+  };
 
   if (loading) {
     return (
@@ -72,8 +80,8 @@ function ResultsPage() {
 
   return (
     <ResultsContainer>
-      <ResultsList data={animals} />
-      <ResultPreview />
+      <ResultsList data={animals} preview={(id) => handlePreview(id)} />
+      {preview && <ResultPreview data={animals[0]} />}
     </ResultsContainer>
   );
 }

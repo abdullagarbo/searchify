@@ -1,0 +1,16 @@
+.figure {
+  display: block;
+  margin: 20px auto;
+  max-width: 320px;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.figure p {
+  margin: 10px 0;
+}
+
+.figure h2 {
+  margin-bottom: 5px;
+}

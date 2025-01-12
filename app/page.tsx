@@ -29,8 +29,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const searchParam = searchParams.get('search');
-    if (!searchParam) {
+    const searchQuery = searchParams.get('search')?.toString();
+    if (!searchQuery) {
       setSearch('');
     }
 

@@ -29,4 +29,6 @@ export const searchData = async (keyword: string) => {
   );
 };
 
-export default data;
+export const searchDataById = (id: number) => {
+  return data.filter((item) => item.id == id);
+};

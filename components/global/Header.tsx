@@ -34,8 +34,10 @@ function Header() {
   };
 
   useEffect(() => {
-    const searchQuery = searchParams.get('search');
-    if (!searchQuery) {
+    const searchQuery = searchParams.get('search')?.toString();
+    if (searchQuery) {
+      setSearch(searchQuery);
+    } else {
       setSearch('');
     }
   }, [searchParams]);

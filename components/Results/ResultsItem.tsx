@@ -7,13 +7,21 @@ const searchLink = {
   marginBottom: '4px',
 };
 
-function ResultsItem({ result }: { result: Result }) {
+function ResultsItem({
+  result,
+  preview,
+}: {
+  result: Result;
+  preview: (id: number) => void;
+}) {
   const { id, url, title, description } = result;
   return (
     <li key={id}>
       <cite style={searchLink}>{url}</cite>
       <h3>
-        <a href='#'>{title}</a>
+        <a role='button' onClick={() => preview(id)}>
+          {title}
+        </a>
       </h3>
       <p>{description}</p>
     </li>

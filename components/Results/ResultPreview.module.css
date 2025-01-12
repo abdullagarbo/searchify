@@ -1,3 +1,9 @@
-.searchPreview {
+.resultPreview {
   flex: 2;
+}
+
+@media (max-width: 1024px) {
+  .resultPreview {
+    display: none;
+  }
 }
