@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import ResultsContainer from '@/components/Results/ResultsContainer';
 import ResultsNotFound from '@/components/Results/ResultsNotFound';
 import ResultsList from '@/components/Results/ResultsList';
@@ -11,6 +11,7 @@ import { Result } from '@/utils/types';
 import { searchData } from '@/utils/data';
 
 function ResultsPage() {
+  const { replace } = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.get('search');
   const keyword = search || '';
@@ -25,8 +26,11 @@ function ResultsPage() {
       setLoading(false);
     };
 
+    const params = new URLSearchParams(searchParams);
+    params.set('withSearchInput', 'true');
+    replace(`/results?${params.toString()}`);
     fetchData();
-  }, [keyword]);
+  }, [keyword, searchParams, replace]);
 
   if (loading) {
     return (
@@ -55,16 +59,16 @@ function ResultsPage() {
     );
   }
 
-  // if (keyword === '') {
-  //   return (
-  //     <ResultsContainer>
-  //       <ResultsNotFound
-  //         description='insect, fish, horse, crocodile, bear, cetacean, cow, lion,
-  //           rabbit, cat, snake, dog, bird.'
-  //       />
-  //     </ResultsContainer>
-  //   );
-  // }
+  if (keyword === '') {
+    return (
+      <ResultsContainer>
+        <ResultsNotFound
+          description='insect, fish, horse, crocodile, bear, cetacean, cow, lion,
+            rabbit, cat, snake, dog, bird.'
+        />
+      </ResultsContainer>
+    );
+  }
 
   return (
     <ResultsContainer>

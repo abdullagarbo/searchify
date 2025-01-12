@@ -8,6 +8,12 @@
   box-sizing: border-box;
 }
 
+.logoSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .userSection {
   display: flex;
   align-items: center;
@@ -22,6 +28,14 @@
   .header {
     flex-direction: column;
     align-items: center;
+  }
+
+  .logoSection {
+    flex-direction: column;
+  }
+
+  .logoSection p {
+    margin-bottom: 10px;
   }
 
   .userSection {

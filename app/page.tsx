@@ -24,6 +24,7 @@ export default function Home() {
     } else {
       params.delete('search');
     }
+    params.set('withSearchInput', 'true');
     replace(`/results?${params.toString()}`);
   };
 
@@ -32,7 +33,11 @@ export default function Home() {
     if (!searchParam) {
       setSearch('');
     }
-  }, [searchParams]);
+
+    const params = new URLSearchParams(searchParams);
+    params.delete('withSearchInput');
+    replace(`/?${params.toString()}`);
+  }, [searchParams, replace]);
 
   return (
     <main className={styles.container}>
