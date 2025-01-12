@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Result } from '@/utils/types';
+import noImage from '@/public/no-image.jpg';
 import styles from './Card.module.css';
 
 function Card({ data }: { data?: Result }) {
@@ -7,7 +8,7 @@ function Card({ data }: { data?: Result }) {
     <figure className={styles.figure}>
       <div className={styles.imageContainer}>
         <Image
-          src={data?.image || ''}
+          src={data?.image || noImage}
           alt='animal image'
           width={300}
           height={300}
