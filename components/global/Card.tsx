@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Result } from '@/utils/types';
-import noImage from '@/public/no-image.jpg';
+import noImage from '../../public/no-image.jpg';
 import styles from './Card.module.css';
 
 function Card({ data }: { data?: Result }) {
