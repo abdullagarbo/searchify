@@ -1,6 +1,6 @@
 import PageNotFound from '@/components/global/PageNotFound';
 
-export default function NotFoundPage() {
+function NotFoundPage() {
   return (
     <PageNotFound
       title='Page not found 404'
@@ -8,3 +8,5 @@ export default function NotFoundPage() {
     />
   );
 }
+
+export default NotFoundPage;
