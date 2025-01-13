@@ -14,7 +14,9 @@ import { searchData, searchDataById } from '@/utils/data';
 function ResultsPage() {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
-  const search = searchParams.get('search')?.toString();
+  const search = searchParams
+    ? searchParams?.get('search')?.toString() || ''
+    : '';
   const keyword = search || '';
   const [animals, setAnimals] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +42,7 @@ function ResultsPage() {
       setPreview(false);
     };
 
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ? searchParams : '');
     params.set('withSearchInput', 'true');
     replace(`/results?${params.toString()}`);
     fetchData();

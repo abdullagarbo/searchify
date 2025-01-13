@@ -12,13 +12,13 @@ export default function Home() {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const [search, setSearch] = useState(
-    searchParams.get('search')?.toString() || ''
+    searchParams ? searchParams?.get('search')?.toString() || '' : ''
   );
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const value = search;
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ? searchParams : '');
     if (value) {
       params.set('search', value);
     } else {
@@ -29,12 +29,14 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const searchQuery = searchParams.get('search')?.toString();
+    const searchQuery = searchParams
+      ? searchParams?.get('search')?.toString() || ''
+      : '';
     if (!searchQuery) {
       setSearch('');
     }
 
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ? searchParams : '');
     params.delete('withSearchInput');
     replace(`/?${params.toString()}`);
   }, [searchParams, replace]);

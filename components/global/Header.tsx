@@ -13,12 +13,12 @@ function Header() {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const [search, setSearch] = useState(
-    searchParams.get('search')?.toString() || ''
+    searchParams ? searchParams?.get('search')?.toString() || '' : ''
   );
-  const withSearchInput = searchParams.get('withSearchInput');
+  const withSearchInput = searchParams?.get('withSearchInput');
 
   const handleSearch = useDebouncedCallback(() => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ? searchParams : '');
     if (search) {
       params.set('search', search);
     } else {
@@ -34,7 +34,9 @@ function Header() {
   };
 
   useEffect(() => {
-    const searchQuery = searchParams.get('search')?.toString();
+    const searchQuery = searchParams
+      ? searchParams?.get('search')?.toString() || ''
+      : '';
     if (searchQuery) {
       setSearch(searchQuery);
     } else {
